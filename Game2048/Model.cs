@@ -49,7 +49,7 @@ namespace Game2048
 
         void Join(int x, int y, int sx, int sy)
         {
-            if (map.Get(x, y) > 0)
+            if (map.Get(x, y) > 0){
                 if (map.Get(x + sx, y + sy) == map.Get(x, y))
                 {
                     map.Set (x + sx, y+ sy, map.Get(x, y) *2);
@@ -61,6 +61,9 @@ namespace Game2048
                     map.Set(x, y, 0);
 
                 }
+            } else {
+                isGameOver();
+            }
         }
         public void Left()
         {
