@@ -33,18 +33,20 @@ namespace Game2048
             return map.Get(x, y);
         }
 
-        
-        void Lift (int x, int y, int sx, int sy)
+
+        void Lift(int x, int y, int sx, int sy)
         {
-            if (map.Get(x, y) > 0 )
+            if (map.Get(x, y) > 0)
+            {
                 while (map.Get(x + sx, y + sy) == 0)
                 {
                     map.Set(x + sx, y + sy, map.Get(x, y));
                     map.Set(x, y, 0);
                     x += sx;
                     y += sy;
-                    moved= true;
+                    moved = true;
                 }
+            }
         }
 
         void Join(int x, int y, int sx, int sy)
@@ -61,8 +63,6 @@ namespace Game2048
                     map.Set(x, y, 0);
 
                 }
-            } else {
-                isGameOver();
             }
         }
         public void Left()
@@ -75,6 +75,7 @@ namespace Game2048
                 for (int x = 1; x < map.size; x++)
                     Join(x, y, -1, 0);
             if (moved) AddRandomNumber();
+            else IsGameOver();
         }
 
         public void Right()
@@ -87,6 +88,7 @@ namespace Game2048
                 for (int x = map.size - 2; x >= 0; x--)
                     Join(x, y, +1, 0);
             if (moved) AddRandomNumber();
+            else IsGameOver();
         }
 
         public void Up()
@@ -99,7 +101,7 @@ namespace Game2048
                 for (int y = 1; y < map.size; y++)
                     Join(x, y, 0, -1);
             if (moved) AddRandomNumber();
-        
+            else IsGameOver();
         }
 
         public void Down()
@@ -112,6 +114,7 @@ namespace Game2048
                 for (int y = map.size - 2; y >= 0; y--)
                     Join(x, y, 0, +1);
             if (moved) AddRandomNumber();
+            else IsGameOver();
         }
 
         public void Start()
@@ -126,8 +129,8 @@ namespace Game2048
 
         public bool IsGameOver()
         {
-            if (isGameOver) 
-                return isGameOver;
+            //if (isGameOver) бесполезная проверка.
+            //    return isGameOver;
             for (int  x = 0;  x < size;  x++)
                 for (int y = 0; y < size; y++)
                     if (map.Get(x, y) == 0)
